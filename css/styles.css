@@ -237,6 +237,8 @@ img {
   background-color: rgba(0, 0, 0, 0.2);
   opacity: 1;
   visibility: visible;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 9;
 }
 
 .backdrop.is-hidden {
@@ -245,11 +247,14 @@ img {
   pointer-events: none;
 }
 
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(0.3);
+}
+
 .modal {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
 
   min-width: 528px;
   min-height: 581px;
@@ -257,9 +262,33 @@ img {
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
+
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.btn-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
 
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  padding: 6px;
+  cursor: pointer;
+}
+
+.modal-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.btn-close:hover .modal-icon,
+.btn-close:focus .modal-icon {
+  fill: var(--accent-color);
+}
 
 /* =================== Секция Особенности ================ */
 
@@ -338,7 +367,6 @@ img {
 
 .example-item {
   position: relative;
-  z-index: -1;
 }
 
 .example-table {
